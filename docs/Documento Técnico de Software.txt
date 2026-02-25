@@ -1,0 +1,172 @@
+Documento Técnico de Software: E-commerce LunnStore
+
+#-#-#-#-#
+
+1. Visão Geral do Sistema
+A LunnStore é um ecossistema de perfumaria de luxo composto por uma plataforma de e-commerce (Cliente) e uma interface de gerenciamento externo (Backoffice).
+
+Core (PHP): Gerencia toda a experiência do cliente, cálculos de venda e persistência imediata no banco de dados.
+
+API de Gestão (Express.js/PHP): Atua como uma camada de serviço externa para extração de dados financeiros e manutenção de estoque.
+
+2. Tela Inicial (Home)
+Hero Section: Impacto visual com a logo centralizada, fundo estrelado e o slogan focado em sofisticação.
+
+Vitrine Dinâmica: * Slider de lançamentos.
+
+Seção "Destaques": Produtos mais vendidos.
+
+Seção "Oportunidades": Produtos com menores preços.
+
+Busca Global: Campo de pesquisa por nome no cabeçalho com redirecionamento para o catálogo filtrado.
+
+3. Catálogo e Página de Produto
+Navegação: Filtros por categoria e preço. Ordenação por nome, preço e popularidade.
+
+Ficha Técnica: Detalhamento de notas olfativas (topo, coração e base) e volumetria.
+
+Cálculo de Frete: Integração via JavaScript para cálculo de valor e prazo por CEP na página do produto.
+
+4. Gestão de Carrinho e Favoritos
+Carrinho: Gerenciamento reativo de quantidades e exclusão de itens.
+
+Regra de Acesso: Navegação livre para visualização. Login obrigatório para favoritar e realizar o checkout.
+
+5. Fluxo de Checkout e Regras de Negócio (PHP)
+Processamento Interno: O PHP realiza o cálculo final (Produtos + Frete) e valida a disponibilidade em estoque no ato da compra.
+
+Baixa Automática: Ao confirmar o pagamento, o sistema PHP decrementa automaticamente a quantidade vendida no banco de dados de estoque.
+
+Meios de Pagamento: Suporte simulado para PIX, Boleto e Cartão de Crédito.
+
+Comunicação: Disparo automático de e-mail de confirmação pós-venda.
+
+6. Área do Cliente e Institucional
+Área Privada: Edição de perfil, consulta de histórico de pedidos e lista de favoritos.
+
+Nossa História: Conteúdo institucional focado na identidade lunar e exclusividade da marca.
+
+7. API de Gestão Externa (Backoffice)
+Gestão de Inventário: Endpoint para visualização do status do estoque e permissão para alterações manuais (ajuste de saldo) via requisições externas.
+
+Monitoramento Financeiro: Endpoint para consulta de métricas de vendas (faturamento total, ticket médio e volume de pedidos) para fins de administração e geração de relatórios.
+
+#-#-#-#-#
+
+8. Requisitos Funcionais (RF)
+A. Gestão de Usuários e Acesso
+RF01: O sistema deve permitir que o visitante crie uma conta fornecendo Nome, E-mail e Senha.
+
+RF02: O sistema deve realizar a autenticação do usuário (Login) via E-mail e Senha.
+
+RF03: O sistema deve permitir que o usuário logado altere seus dados cadastrais (Nome, E-mail, Senha e Endereço).
+
+RF04: O sistema deve restringir o acesso às funcionalidades de "Favoritos" e "Finalizar Compra" apenas para usuários logados.
+
+B. Navegação e Catálogo
+RF05: O sistema deve exibir uma vitrine dinâmica na Home com carrossel de banners.
+
+RF06: O sistema deve listar produtos categorizados como "Mais Vendidos" e "Melhor Custo-benefício" na Home.
+
+RF07: O sistema deve permitir a busca de produtos por nome através de um campo global no cabeçalho.
+
+RF08: O sistema deve filtrar produtos por categoria (Masculino, Feminino, Unissex) na tela de catálogo.
+
+RF09: O sistema deve filtrar produtos por faixa de preço.
+
+RF10: O sistema deve ordenar produtos por Nome (A-Z/Z-A), Preço (Crescente/Decrescente) e Popularidade.
+
+C. Experiência de Produto e Carrinho
+RF11: O sistema deve exibir a ficha técnica detalhada (Notas olfativas e volumetria) na página individual do produto.
+
+RF12: O sistema deve calcular o frete e prazo de entrega após a inserção do CEP na página do produto.
+
+RF13: O sistema deve permitir adicionar, remover e alterar a quantidade de itens no carrinho de compras.
+
+RF14: O sistema deve atualizar o valor total do carrinho automaticamente (reatividade) ao alterar quantidades.
+
+RF15: O sistema deve permitir que o usuário adicione produtos a uma lista de "Favoritos".
+
+D. Checkout e Vendas (Processamento PHP)
+RF16: O sistema deve validar a disponibilidade de estoque antes de confirmar o pedido.
+
+RF17: O sistema deve exibir o resumo total (Preço dos itens + Frete) antes da finalização.
+
+RF18: O sistema deve gerar um QR Code/Código para pagamentos via PIX.
+
+RF19: O sistema deve fornecer um link/visualização de boleto bancário para pagamento.
+
+RF20: O sistema deve simular o processamento de pagamento via Cartão de Crédito.
+
+RF21: O sistema deve realizar a baixa automática no estoque após a confirmação do pagamento.
+
+RF22: O sistema deve enviar um e-mail de confirmação de compra para o usuário.
+
+RF23: O sistema deve registrar o histórico de pedidos para consulta posterior do usuário.
+
+E. API de Gestão Externa (Backoffice Express/Node)
+RF24: A API deve disponibilizar um endpoint para consulta do saldo atual de estoque de cada produto.
+
+RF25: A API deve permitir a alteração manual da quantidade de estoque (Entrada/Saída).
+
+RF26: A API deve fornecer o somatório de faturamento total da loja.
+
+RF27: A API deve fornecer métricas de Ticket Médio e volume total de pedidos realizados.
+
+9. Requisitos Não Funcionais (RNF)
+A. Performance e Disponibilidade
+RNF01: O sistema deve carregar as páginas principais em menos de 2,5 segundos sob condições normais de rede.
+
+RNF02: O banco de dados deve garantir a integridade referencial (ex: não permitir deletar um produto que possui histórico de vendas).
+
+B. Segurança e Proteção de Dados
+RNF03: Todas as senhas devem ser criptografadas no banco de dados (Hash).
+
+RNF04: A API de Gestão deve possuir uma chave de acesso (API Key ou Token JWT) para impedir acessos não autorizados.
+
+RNF05: O sistema deve proteger as rotas de usuário logado via Sessões (PHP Session) ou Cookies seguros.
+
+C. Interface e Usabilidade
+RNF06: A interface deve ser totalmente responsiva (Mobile-First) utilizando Bootstrap 5.
+
+RNF07: O sistema deve fornecer feedback visual (Toasts ou Modais) ao adicionar itens ao carrinho ou ocorrer erros de login.
+
+RNF08: O layout deve seguir a identidade visual da LunnStore (Cores: Prata, Branco, Dourado #fcff69 e Fundo Escuro).
+
+D. Arquitetura e Integração
+RNF09: A comunicação entre o Frontend (JS) e as APIs (Frete/Gestão) deve ser feita exclusivamente via JSON.
+
+RNF10: O código deve ser versionado em repositório Git com mensagens de commit claras.
+
+#-#-#-#-#
+
+10. Estrutura do Banco de Dados (Database Schema)
+O sistema utiliza o MySQL/MariaDB como motor de banco de dados relacional. A modelagem foi projetada para garantir a integridade referencial e delegar regras de negócio complexas ao próprio SGDB através de Procedures e Views.
+
+10.1. Dicionário de Entidades Principais
+Produtos (produtos, produto_imagens, produto_banner): Centraliza as informações das fragrâncias. A separação em tabelas de imagens e banners permite que um único perfume tenha múltiplas perspectivas visuais e campanhas de marketing distintas.
+
+Controle de Estoque (estoque): Tabela desacoplada da tabela de produtos para facilitar a manutenção e integração com a API externa de gestão.
+
+Vendas (pedidos, item_pedido): Registra o cabeçalho da transação (forma de pagamento, total, status) e os itens específicos de cada compra, mantendo o histórico de preços da época da venda.
+
+Logística Inteligente (tabela_fretes, zonas_frete): Sistema escalonado que associa estados brasileiros a faixas de preço e prazos, permitindo uma precificação dinâmica de frete por região.
+
+Segurança Financeira (usuario_cartoes): Armazena tokens de pagamento criptografados e metadados dos cartões (bandeira e últimos 4 dígitos) para facilitar compras futuras sem expor dados sensíveis (PCI Compliance).
+
+10.2. Lógica de Negócio em Banco (Stored Procedures)
+Para otimizar a performance e reduzir o tráfego de rede, foram implementadas Procedures que processam dados complexos:
+
+inserir_produto: Automatiza a criação do produto, inserção inicial de estoque e o mapeamento de múltiplas URLs de imagens através de um sistema de fracionamento de strings (arrays simulados).
+
+criar_pedido: Gerencia a transação de venda de forma atômica. Ela verifica a disponibilidade de estoque, calcula o total acumulado, gera os registros de itens e realiza o decremento automático no inventário. Caso o estoque seja insuficiente, a procedure emite um sinal de erro (SIGNAL SQLSTATE), impedindo a venda inconsistente.
+
+10.3. Camada de Abstração (Views)
+O sistema utiliza Views para simplificar as consultas no PHP e na API:
+
+vw_produtos_vitrine: Consolida preço final (com desconto), imagem de capa, descrição resumida e ranking de popularidade em uma única consulta.
+
+vw_overall_produtos: Utilizada pela API de Gestão para fornecer uma visão administrativa do valor total investido em estoque.
+
+#-#-#-#-#
+

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       :root {
+  --moon-color: #ffffff;
+  --shadow-color: #1a1a1a;
+  --glow: #fcff69;
+}
+
+.moon-loader {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: relative;
+  background-color: var(--moon-color);
+  box-shadow: 0 0 20px var(--glow);
+  overflow: hidden;
+}
+
+.moon-loader::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: var(--shadow-color);
+  left: 100%;
+  /* Usamos a mesma animação para posição e para o flip */
+  animation: moon-cycle 4s infinite linear;
+}
+
+@keyframes moon-cycle {
+  /* FASE 1: A sombra entra da direita e cobre a lua */
+  0% {
+    left: 100%;
+    transform: scaleX(1);
+  }
+  48% {
+    left: 0%;
+    transform: scaleX(1);
+  }
+  50%{
+    left: 0%;
+  }
+  /* FASE 3: A sombra (invertida) volta a cobrir vindo da "esquerda" visual */
+  50% {
+    left: 100%;
+    transform: scaleX(-1);
+  }
+  98% {
+    left: 0%;
+    transform: scaleX(-1);
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.preloader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--shadow-color);
+}
+
+    </style>
+</head>
+<body>
+    <div class="preloader">
+        <div class="moon-loader"></div>
+    </div>
+</body>
+</html>

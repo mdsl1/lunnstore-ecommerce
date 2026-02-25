@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Megrim&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    background: #ccc;
+    font-family: "Inter",  sans-serif;
+}
+
+.f-megrim {
+    font-family: "Megrim", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.text-yellow {
+    color: #ffc107;
+}
+.text-title {
+    color: #080044;
+    text-shadow: #fdff6a 0 2px 2px;
+}
+
+.link-hover {
+    transition: transform 0.3s ease;
+}
+
+.link-hover:hover {
+    color: #fdff6a !important;
+}
+
+.w-80 {
+    width: 80%;
+}
+
+.btn-yellow {
+    background-color: #fbff29;
+    color: #121212;
+    border-radius: 8px;
+    border: #fbff29 solid 2px;
+}
+.btn-yellow:hover {
+    background-color: none;
+    color: #fbff29;
+    border: #fbff29 solid 2px;
+}
+
+.text-shadow {
+    text-shadow: #050124 0 5px 1px;
+}
+
+/* Estilo Cards */
+.shadow-card {
+    box-shadow: 0 4px 10px 0 #00000078, 0 6px 20px 0 #ffffff30;
+}
+
+.bg-card {
+    background: radial-gradient(circle at center, #1c1552f2 0%, #050124db 100%);
+}
+.card {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    user-select: none;
+}
+:root {
+    --swiper-navigation-color: #ffc107; /* Cor Amarela do Bootstrap */
+    --swiper-navigation-size: 25px;    /* Tamanho das setas */
+}
+
+.swiper-pagination-bullet-active {
+    background: #ffc107 !important;
+}
+
+.card_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 10%;
+    transition: .5s ease;
+    text-align: center;
+    color: none;
+}
+
+.card:hover .overlay {
+    height: 100%;
+    color: #fff;
+    padding-top: 15% !important;
+}
+
+main {
+    scroll-margin-top: 50px;
+}

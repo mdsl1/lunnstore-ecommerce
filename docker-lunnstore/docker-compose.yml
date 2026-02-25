@@ -1,0 +1,25 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lunnstore-app
+    ports:
+      - "8080:80"
+    volumes:
+      - ../src:/var/www/html
+
+  db:
+    image: mysql:8.0
+    container_name: lunnstore-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: SQL@142536.
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ../database:/docker-entrypoint-initdb.d 
+
+volumes:
+  db_data:

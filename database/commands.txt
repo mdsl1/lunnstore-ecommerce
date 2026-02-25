@@ -1,0 +1,27 @@
+- Comando para acessar o banco de dados via cmd:
+docker exec -it lunnstore-db mysql -u root -p
+    Vai pedir usuário e senha (ambos estão no docker-compose)
+
+- Comando para importar a estrutura de bancos de database.sql:
+docker exec -i lunnstore-db mysql -u root -p"SQL@142536." < ../database/database.sql
+
+- Comando para criar um backup do banco de dados:
+docker exec lunnstore-db mysqldump -u root -p"SQL@142536." lunnstore_db > backup.sql
+
+
+## COMANDOS SQL ##
+
+- Listar os bancos:
+SHOW DATABASES;
+
+- Listar as tabelas do banco:
+SHOW TABLES;
+
+- Mostrar estrutura da tabela:
+DESC nome_tabela;
+
+- Listar as Procedures:
+SHOW PROCEDURE STATUS WHERE db = database();
+
+- Sair do terminar mysql:
+exit

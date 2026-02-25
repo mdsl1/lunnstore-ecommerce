@@ -1,0 +1,8 @@
+- Comando para iniciar container:
+docker-compose up -d
+
+- Comando para parar container:
+docker-compose stop
+
+- Comando para excluir um container:
+docker-compose down -v
