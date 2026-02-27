@@ -1,6 +1,5 @@
 <?php 
     require_once __DIR__ . "/../config.php";
-    require_once ROOT_PATH . "modules/base/header.php"; 
 ?>
 
 <style>
@@ -40,6 +39,8 @@
     }
 </style>
 
+<?php require_once ROOT_PATH . "modules/base/header.php"; ?>
+
 <section id="heroSection" class="container-fluid w-100 d-flex align-items-center" style="height: 100vh; background: radial-gradient(circle at center, #1c1552 0%, #050124 100%); color: white;">
     <div class="container">
         <div class="row align-items-center">
@@ -74,6 +75,8 @@
 
     <!-- Carrossel de Produtos -->
     <?php require_once ROOT_PATH . "modules/produtos/components/carousel.php"; ?>
+
+    <?php require_once ROOT_PATH . "modules/base/searchbar.php"; ?>
 
     <!-- Produtos Mais Vendidos -->
     <section class="w-80 mt-5 mb-3 text-center">
